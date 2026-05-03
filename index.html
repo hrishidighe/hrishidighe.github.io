@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hrishikesh Dighe — Construction Project Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #0f1525;
+    --surface: #131a2b;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8ecf4;
+    --muted: #94a3b8;
+    --accent: #f59e0b;
+    --accent-2: #fbbf24;
+    --blue: #3b82f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .display { font-family: 'Playfair Display', Georgia, serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    backdrop-filter: blur(20px); background: rgba(10,14,26,0.7);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto; padding: 1.2rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700;
+    letter-spacing: 1px; color: var(--text);
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { list-style: none; display: flex; gap: 2.2rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.88rem;
+    font-weight: 500; transition: color 0.2s; position: relative;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -6px; left: 0; width: 0;
+    height: 2px; background: var(--accent); transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .menu-toggle { display: none; background: none; border: none; color: var(--text);
+    cursor: pointer; font-size: 1.5rem; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; position: relative; display: flex; align-items: center;
+    overflow: hidden; padding: 8rem 2rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80') center/cover;
+    filter: brightness(0.35) contrast(1.1);
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,14,26,0.92) 0%, rgba(15,21,37,0.75) 50%, rgba(10,14,26,0.95) 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;
+  }
+  .hero-text { max-width: 800px; }
+  .hero-eyebrow {
+    display: inline-block; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.5rem; padding: 0.4rem 1rem;
+    border: 1px solid rgba(245,158,11,0.4); border-radius: 30px;
+    background: rgba(245,158,11,0.08);
+  }
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; color: var(--text);
+  }
+  .hero-content h1 span { color: var(--accent); font-style: italic; }
+  .hero-tagline {
+    font-size: 1.15rem; color: var(--muted); margin-bottom: 2rem;
+    max-width: 640px; line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700;
+    color: var(--accent); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-top: 0.4rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.9rem 2rem; border-radius: 4px; font-size: 0.9rem;
+    font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0a0e1a; border: 2px solid var(--accent);
+  }
+  .btn-primary:hover {
+    background: var(--accent-2); border-color: var(--accent-2);
+    transform: translateY(-2px); box-shadow: 0 10px 30px rgba(245,158,11,0.3);
+  }
+  .btn-outline {
+    background: transparent; color: var(--text); border: 2px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover {
+    border-color: var(--text); background: rgba(255,255,255,0.05); transform: translateY(-2px);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; position: relative; }
+  .container { max-width: 1280px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--accent);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 1rem; color: var(--text); line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted); font-size: 1rem; max-width: 640px;
+    margin-bottom: 4rem; line-height: 1.7;
+  }
+
+  /* ABOUT */
+  #about { background: var(--bg-2); }
+  .about-grid {
+    display: grid; grid-template-columns: 5fr 4fr; gap: 4rem; align-items: center;
+  }
+  .about-image {
+    position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/5;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; }
+  .about-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,14,26,0.4) 100%);
+  }
+  .about-image-decor {
+    position: absolute; bottom: -20px; right: -20px; padding: 1.5rem 2rem;
+    background: var(--accent); border-radius: 4px; color: #0a0e1a;
+    box-shadow: 0 20px 40px rgba(245,158,11,0.3);
+  }
+  .about-image-decor strong {
+    display: block; font-size: 1.8rem; font-family: 'Playfair Display', serif;
+  }
+  .about-image-decor span { font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; }
+  .about-text strong { color: var(--text); font-weight: 600; }
+  .about-info {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .info-item .label {
+    font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 0.3rem;
+  }
+  .info-item .value { color: var(--text); font-size: 0.92rem; font-weight: 500; }
+
+  /* EXPERTISE */
+  #expertise { background: var(--bg); }
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .expertise-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .expertise-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .expertise-card:hover { transform: translateY(-5px); border-color: rgba(245,158,11,0.3); }
+  .expertise-card:hover::before { transform: scaleX(1); }
+  .expertise-icon {
+    width: 50px; height: 50px; border-radius: 8px;
+    background: rgba(245,158,11,0.1); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 1.5rem; font-size: 1.5rem;
+  }
+  .expertise-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    margin-bottom: 0.8rem; color: var(--text);
+  }
+  .expertise-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg-2); }
+  .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-card {
+    background: var(--surface); border-radius: 12px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 2fr; transition: all 0.3s ease;
+    border: 1px solid var(--border);
+  }
+  .exp-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-3px); }
+  .exp-image { position: relative; min-height: 280px; overflow: hidden; }
+  .exp-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .exp-card:hover .exp-image img { transform: scale(1.05); }
+  .exp-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 50%, rgba(10,14,26,0.5));
+  }
+  .exp-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .exp-date {
+    font-size: 0.78rem; color: var(--accent); font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .exp-body h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    margin-bottom: 0.4rem; color: var(--text);
+  }
+  .exp-company {
+    color: var(--muted); font-size: 0.92rem; margin-bottom: 1.2rem; font-weight: 500;
+  }
+  .exp-body p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; line-height: 1.7; }
+  .exp-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .exp-tag {
+    font-size: 0.72rem; padding: 0.3rem 0.8rem; background: rgba(245,158,11,0.1);
+    color: var(--accent); border-radius: 30px; font-weight: 500;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--bg); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+  }
+  .skill-group h4 {
+    font-size: 1rem; color: var(--text); margin-bottom: 1.5rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .skill-group h4 .dot {
+    width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    color: var(--muted); padding: 0.45rem 0.9rem; border-radius: 30px;
+    font-size: 0.82rem; transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    background: rgba(245,158,11,0.1); color: var(--accent);
+    border-color: rgba(245,158,11,0.3);
+  }
+
+  /* EDUCATION */
+  #education { background: var(--bg-2); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; }
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; transition: all 0.3s ease;
+  }
+  .edu-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-3px); }
+  .edu-image {
+    height: 180px; position: relative; overflow: hidden;
+  }
+  .edu-image img { width: 100%; height: 100%; object-fit: cover; }
+  .edu-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(15,21,37,0.85));
+  }
+  .edu-body { padding: 1.8rem; }
+  .edu-degree {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    color: var(--text); margin-bottom: 0.4rem;
+  }
+  .edu-school { color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem; font-weight: 500; }
+  .edu-meta {
+    display: flex; justify-content: space-between; gap: 1rem;
+    padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .edu-meta span {
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .edu-meta strong { color: var(--accent); }
+
+  /* CERTIFICATIONS */
+  #certifications { background: var(--bg); }
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem; text-align: center;
+    transition: all 0.3s ease;
+  }
+  .cert-card:hover {
+    border-color: rgba(245,158,11,0.3); transform: translateY(-3px);
+    background: rgba(245,158,11,0.04);
+  }
+  .cert-card .cert-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .cert-card h5 {
+    font-size: 0.92rem; color: var(--text); margin-bottom: 0.3rem; font-weight: 600;
+  }
+  .cert-card p { font-size: 0.78rem; color: var(--muted); }
+
+  /* CONTACT */
+  #contact { background: var(--bg-2); position: relative; overflow: hidden; }
+  #contact::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%);
+  }
+  .contact-wrap {
+    text-align: center; max-width: 700px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .contact-wrap .section-eyebrow { justify-content: center; }
+  .contact-wrap .section-eyebrow::before,
+  .contact-wrap .section-eyebrow::after {
+    content: ''; width: 40px; height: 1px; background: var(--accent);
+  }
+  .contact-methods {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 3rem;
+  }
+  .contact-method {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.8rem 1.2rem; text-decoration: none;
+    transition: all 0.3s ease; display: block;
+  }
+  .contact-method:hover {
+    border-color: var(--accent); transform: translateY(-5px);
+    background: rgba(245,158,11,0.04);
+  }
+  .contact-method .method-icon {
+    font-size: 1.5rem; margin-bottom: 0.8rem;
+  }
+  .contact-method .method-label {
+    font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 0.3rem;
+  }
+  .contact-method .method-value {
+    color: var(--text); font-size: 0.92rem; font-weight: 500; word-break: break-word;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg); padding: 2rem; text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer .heart { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 968px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .exp-card { grid-template-columns: 1fr; }
+    .exp-image { min-height: 220px; }
+  }
+  @media (max-width: 720px) {
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .nav-inner { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+    .nav-links.active {
+      display: flex; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 1rem; padding: 1.5rem;
+      background: var(--bg-2); border-bottom: 1px solid var(--border);
+    }
+    .hero-stats { gap: 2rem; }
+    .stat-num { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Hrishikesh<span>.</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Construction · Infrastructure · Engineering</span>
+      <h1>Building <span>what's next</span><br/>in capital projects.</h1>
+      <p class="hero-tagline">
+        Project management professional with hands-on experience in capital project delivery,
+        owner-side coordination, and structural engineering. Based in Boston, currently completing
+        my M.S. at Northeastern University.
+      </p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">650+</div>
+          <div class="stat-label">Bridge Assets Tracked</div>
+        </div>
+        <div>
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">3.73</div>
+          <div class="stat-label">Graduate GPA</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#experience" class="btn btn-primary">View My Work →</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Construction site"/>
+        <div class="about-image-decor">
+          <strong>2026</strong>
+          <span>GRADUATING</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-eyebrow">About Me</div>
+        <h2 class="section-title">Engineer by training.<br/>Project manager by practice.</h2>
+        <p>
+          I am a civil and structural engineering professional with hands-on experience that bridges
+          two worlds: the technical precision of structural design, and the systems-thinking discipline
+          of capital project management.
+        </p>
+        <p>
+          My time as a <strong>Senior Engineering &amp; Capital Co-op</strong> at the MBTA's Bridges &amp; Structures
+          Program taught me what it takes to deliver public infrastructure at scale — managing contracts,
+          coordinating consultants, and building data systems that drive better decisions.
+        </p>
+        <p>
+          Earlier, as a <strong>Structural Design Engineer</strong> at Shanghvi &amp; Associates in Mumbai,
+          I designed mid- and high-rise residential, commercial, and institutional buildings —
+          gaining the engineering fluency that informs every project I touch today.
+        </p>
+        <div class="about-info">
+          <div class="info-item">
+            <div class="label">Location</div>
+            <div class="value">Boston, MA</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Graduating</div>
+            <div class="value">June 2026</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Focus</div>
+            <div class="value">Construction PM</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Memberships</div>
+            <div class="value">CMAA · ASCE · PMI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="container">
+    <div class="section-eyebrow">What I Do</div>
+    <h2 class="section-title">Areas of Expertise</h2>
+    <p class="section-sub">
+      A combination of technical engineering and project management capabilities developed
+      across public infrastructure and private sector projects.
+    </p>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="expertise-icon">📐</div>
+        <h3>Capital Project Delivery</h3>
+        <p>End-to-end project support from preconstruction through closeout, including contract administration, RFIs, submittals, and change management.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">💰</div>
+        <h3>Cost Estimating &amp; Controls</h3>
+        <p>Independent Cost Estimates (ICE), budget tracking, variance analysis, and procurement support backed by data-driven benchmarking.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🏗️</div>
+        <h3>Structural Engineering</h3>
+        <p>Design and analysis of structural systems for residential, commercial, and institutional projects using ETABS, SAFE, and AutoCAD.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">📊</div>
+        <h3>Project Controls &amp; PMIS</h3>
+        <p>Schedule monitoring, WBS development, risk register management, and PMIS administration in Trimble e-Builder.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">🔍</div>
+        <h3>Site Engineering</h3>
+        <p>Field inspections, structural condition assessments, and contractor coordination across active infrastructure environments.</p>
+      </div>
+      <div class="expertise-card">
+        <div class="expertise-icon">📈</div>
+        <h3>Data &amp; Reporting</h3>
+        <p>Building inventory and tracking systems that turn fragmented project data into actionable insights for planning and budget control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-eyebrow">Professional Experience</div>
+    <h2 class="section-title">Where I've Worked</h2>
+    <p class="section-sub">
+      Hands-on experience across public infrastructure and structural design — covering
+      both owner-side capital delivery and private sector engineering.
+    </p>
+    <div class="exp-list">
+      <div class="exp-card">
+        <div class="exp-image">
+          <img src="https://images.unsplash.com/photo-1473445730015-841f29a9490b?w=800&q=80" alt="Bridge infrastructure"/>
+        </div>
+        <div class="exp-body">
+          <div class="exp-date">Jul 2025 – Dec 2025 · Boston, MA</div>
+          <h3>Senior Engineering &amp; Capital Co-op</h3>
+          <div class="exp-company">Massachusetts Bay Transportation Authority (MBTA) — Bridges &amp; Structures</div>
+          <p>
+            Supported capital delivery for bridge assets within the MBTA's infrastructure program.
+            Built a comprehensive bridge inventory database tracking 650+ assets — adopted agency-wide
+            for procurement benchmarking and budget control. Administered RFIs, submittals, and
+            change documentation in Trimble e-Builder PMIS.
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">Owner's Rep</span>
+            <span class="exp-tag">Cost Estimating</span>
+            <span class="exp-tag">e-Builder PMIS</span>
+            <span class="exp-tag">Risk Registers</span>
+            <span class="exp-tag">Field Inspections</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-image">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" alt="High-rise structural"/>
+        </div>
+        <div class="exp-body">
+          <div class="exp-date">Jul 2023 – Jul 2024 · Mumbai, India</div>
+          <h3>Structural Design Engineer</h3>
+          <div class="exp-company">Shanghvi &amp; Associates Consultants Pvt. Ltd. (SACPL)</div>
+          <p>
+            Promoted from Trainee Engineer within 9 months. Designed structural systems —
+            beams, slabs, columns, shear walls, foundations — for mid- and high-rise residential,
+            commercial, and institutional projects. Coordinated with architects and MEP teams,
+            performed quantity takeoffs, and conducted on-site inspections.
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">ETABS &amp; SAFE</span>
+            <span class="exp-tag">Structural Design</span>
+            <span class="exp-tag">Quantity Takeoffs</span>
+            <span class="exp-tag">Shop Drawings</span>
+            <span class="exp-tag">Code Compliance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-eyebrow">Toolkit</div>
+    <h2 class="section-title">Skills &amp; Software</h2>
+    <p class="section-sub">
+      A working toolkit spanning project management platforms, structural engineering software,
+      and core construction management practices.
+    </p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4><span class="dot"></span>Project Controls</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Trimble e-Builder</span>
+          <span class="skill-tag">Oracle Primavera P6</span>
+          <span class="skill-tag">MS Project</span>
+          <span class="skill-tag">Procore</span>
+          <span class="skill-tag">PMWeb</span>
+          <span class="skill-tag">SharePoint</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4><span class="dot"></span>Engineering Software</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Revit</span>
+          <span class="skill-tag">ETABS</span>
+          <span class="skill-tag">SAFE</span>
+          <span class="skill-tag">BIM Coordination</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4><span class="dot"></span>Project Management</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">RFI &amp; Submittal Management</span>
+          <span class="skill-tag">Change Order Admin</span>
+          <span class="skill-tag">Cost Estimating</span>
+          <span class="skill-tag">Schedule Monitoring</span>
+          <span class="skill-tag">Risk Registers</span>
+          <span class="skill-tag">WBS Development</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4><span class="dot"></span>Construction</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Contract Administration</span>
+          <span class="skill-tag">Quantity Takeoffs</span>
+          <span class="skill-tag">QA/QC</span>
+          <span class="skill-tag">Site Inspections</span>
+          <span class="skill-tag">Safety Compliance</span>
+          <span class="skill-tag">NBI / SNBI Standards</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4><span class="dot"></span>Productivity</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">MS Excel (Advanced)</span>
+          <span class="skill-tag">PowerPoint</span>
+          <span class="skill-tag">MS Teams</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Outlook</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4><span class="dot"></span>Languages</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">English (Bilingual)</span>
+          <span class="skill-tag">Marathi (Native)</span>
+          <span class="skill-tag">Hindi (Native)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-eyebrow">Education</div>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-sub">
+      Continuous learning across project management, civil engineering, and construction disciplines.
+    </p>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-image">
+          <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800&q=80" alt="Northeastern University"/>
+        </div>
+        <div class="edu-body">
+          <h3 class="edu-degree">M.S. Project Management</h3>
+          <div class="edu-school">Northeastern University · Boston, MA</div>
+          <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
+            Concentration in Construction Management. Coursework in Project Risk &amp; Quality,
+            Safety Management, Alternative Project Delivery, and Construction Law.
+          </p>
+          <div class="edu-meta">
+            <span>Sep 2024 – Jun 2026</span>
+            <span>GPA: <strong>3.73</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-image">
+          <img src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=800&q=80" alt="University campus"/>
+        </div>
+        <div class="edu-body">
+          <h3 class="edu-degree">B.E. Civil Engineering</h3>
+          <div class="edu-school">University of Mumbai · Mumbai, India</div>
+          <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem;">
+            Bachelor of Engineering with focus on structural analysis, construction materials,
+            transportation engineering, and geotechnical foundations.
+          </p>
+          <div class="edu-meta">
+            <span>Sep 2020 – May 2023</span>
+            <span><strong>Graduated</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-eyebrow">Credentials</div>
+    <h2 class="section-title">Certifications &amp; Licenses</h2>
+    <p class="section-sub">
+      Industry-recognized certifications validating safety, project management, and technical proficiency.
+    </p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🦺</div>
+        <h5>OSHA 30-Hour</h5>
+        <p>Construction Safety &amp; Health</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📋</div>
+        <h5>CMIT</h5>
+        <p>Construction Manager-in-Training (CMAA)</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🏗️</div>
+        <h5>Procore</h5>
+        <p>Project Management Certified</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📐</div>
+        <h5>Autodesk Revit</h5>
+        <p>Certified Professional</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📅</div>
+        <h5>Primavera P6</h5>
+        <p>Oracle Project Scheduling</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">⚙️</div>
+        <h5>EIT Exam</h5>
+        <p>Engineer-in-Training (In Preparation)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title">Let's build something together.</h2>
+      <p style="color: var(--muted); margin-bottom: 1rem;">
+        I'm actively seeking full-time roles in construction project management,
+        field engineering, and capital project delivery starting June 2026.
+        I'd love to hear from you.
+      </p>
+      <div class="contact-methods">
+        <a href="https://www.linkedin.com/in/hrishidighe" target="_blank" class="contact-method">
+          <div class="method-icon">💼</div>
+          <div class="method-label">LinkedIn</div>
+          <div class="method-value">@hrishidighe</div>
+        </a>
+        <a href="#" class="contact-method">
+          <div class="method-icon">📍</div>
+          <div class="method-label">Location</div>
+          <div class="method-value">Boston, MA</div>
+        </a>
+        <a href="#" class="contact-method">
+          <div class="method-icon">🎓</div>
+          <div class="method-label">Status</div>
+          <div class="method-value">Graduating June 2026</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Hrishikesh Dighe · Designed &amp; built with <span class="heart">♦</span> in Boston
+</footer>
+
+</body>
+</html>
